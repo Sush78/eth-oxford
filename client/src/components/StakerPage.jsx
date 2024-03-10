@@ -2,6 +2,7 @@ import {useState, useContext } from 'react';
 // import { Button, TextField, Typography, Container, Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import { TransactionContext } from "../context/TransactionContext";
+import { ethers } from "ethers";
 import Modal from './Modal';
 import ModalFlip from './ModalFlip';
 import Confetti from './Confetti';
@@ -184,7 +185,35 @@ const StakerPage = () => {
     audio.play();
   };
 
-  const { currentAccount, connectWallet, handleChange, mintAndDonate, formData, isLoading } = useContext(TransactionContext);
+  const getCurrentEtherToDollarExchangeRate = () => {
+    // Fetch the current Ether to Dollar exchange rate from a reliable source
+    // You may use an API or any other method to get the latest exchange rate
+    // For simplicity, we are returning a hardcoded value here
+    return 2000; // Replace with the actual exchange rate
+  };
+
+  const getGasEstimate = () => {
+    if (gasPrice) {
+      // Calculate the cost in dollars
+      const gasPriceInWei = gasPrice * 1e9;
+      // You need to estimate gas for your specific transaction
+      const gasEstimate = 50000; // hardcoded for now, might implement estimate later
+      // Calculate cost in Wei
+      const costInWei = gasPriceInWei * gasEstimate;
+      // Convert cost from Wei to Ether
+      const costInEther = costInWei / 1e18;
+      // Convert cost from Ether to dollars using the current exchange rate
+      const costInDollars = costInEther * getCurrentEtherToDollarExchangeRate();
+      return costInDollars.toFixed(2); 
+      }
+      return null;
+  }
+
+  const handleMaxClick = () => {
+    setEthAmount(maxBalance)
+  }
+
+  const { currentAccount, connectWallet, mintAndDonate, formData, isLoading, gasPrice, maxBalance} = useContext(TransactionContext);
 
   return (
     <div style={pageStyle}>
@@ -203,13 +232,13 @@ const StakerPage = () => {
           value={ethAmount}
           onChange={(e) => setEthAmount(e.target.value)}
         />
-        <MaxButton>MAX</MaxButton>
+        <MaxButton onClick={() => handleMaxClick()}>MAX</MaxButton>
         </Input>
       {selectedCharity !=='' && <p>Selected Charity: {selectedCharity}</p>}
       <ConnectWalletButton disabled={selectedCharity==='' || !currentAccount} onClick={handleStake}>Stake</ConnectWalletButton>
       <InfoRow>
         <span>You will receive</span>
-        <span>0.0 stETH</span>
+        <span>{ethAmount} stETH</span>
       </InfoRow>
       <InfoRow>
         <span>Exchange rate</span>
@@ -217,11 +246,11 @@ const StakerPage = () => {
       </InfoRow>
       <InfoRow>
         <span>Max transaction cost</span>
-        <span>$45.14</span>
+        <span>Transaction Cost: ${getGasEstimate()}</span>
       </InfoRow>
       <InfoRow>
         <span>Reward fee</span>
-        <span>10%</span>
+        <span>0%</span>
       </InfoRow>
       <Modal
         show={showModal}

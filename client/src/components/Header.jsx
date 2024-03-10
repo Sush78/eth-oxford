@@ -37,7 +37,7 @@ const shortenAddress = (address) => {
 }
 
 const HeaderComp = ({ title }) => {
-  const { currentAccount, connectWallet, handleChange, mintAndDonate, formData, isLoading } = useContext(TransactionContext);  
+  const { currentAccount, connectWallet, mintAndDonate, formData, isLoading } = useContext(TransactionContext);  
   return (
     <HeaderContainer>
       <h3>{title}</h3>

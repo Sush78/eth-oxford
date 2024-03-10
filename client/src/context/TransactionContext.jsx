@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
+import { ETHERSCAN_API_KEY } from "../utils/constants";
 
 import { mockEthContractABI, mockEthcontractAddress, charityVaultcontractAddress, charityVaultContractABI } from "../utils/constants";
 
@@ -13,7 +14,7 @@ const createEthereumContract = () => {
   const signer = provider.getSigner();
   const mockEthContract = new ethers.Contract(mockEthcontractAddress, mockEthContractABI, signer);
   const charityVaultContract = new ethers.Contract(charityVaultcontractAddress, charityVaultContractABI, signer);
-  console.log({mockEthContract})
+//   console.log({mockEthContract})
   return {mockEthContract, charityVaultContract}
 };
 
@@ -23,10 +24,23 @@ export const TransactionProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
   const [transactions, setTransactions] = useState([]);
+  const [gasPrice, setGasPrice] = useState(null);
+  const [maxBalance, setMaxBalance] = useState(null);
 
-  const handleChange = (e, name) => {
-    setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
-  };
+  const fetchGasPrice = async () => {
+    try {
+      // Fetch gas price from Eth Gas Station API
+      const response = await fetch(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${ETHERSCAN_API_KEY}`);
+      const jsonResp = await response.json()
+      const apiGasPriceEth = jsonResp.result.SafeGasPrice
+    //   const gasPriceEth = ethers.utils.parseUnits(apiGasPriceEth.toString(), 'gwei')
+    //   console.log(gasPriceEth)
+      setGasPrice(apiGasPriceEth);
+    } catch (error) {
+      console.error('Error fetching gas price:', error);
+    }
+  }
+
 
   const getAllTransactions = async () => {
     try {
@@ -59,8 +73,8 @@ export const TransactionProvider = ({ children }) => {
     try {
         console.log(formData)
         if (ethereum) {
-          const retVal = createEthereumContract();
-          await retVal.mockEthContract.mint(currentAccount, 100000000);
+          const retVal = createEthereumContract();    
+          await retVal.mockEthContract.mint(currentAccount, formData.ethAmount);
           await retVal.mockEthContract.approve(charityVaultcontractAddress, 100000000);
           await retVal.charityVaultContract._deposit(100000000);
         console.log("done")
@@ -108,8 +122,14 @@ export const TransactionProvider = ({ children }) => {
     try {
       if (!ethereum) return alert("Please install MetaMask.");
       const accounts = await ethereum.request({ method: "eth_requestAccounts", });
-      console.log(accounts)
       setCurrentAccount(accounts[0]);
+      const selectedAccount = accounts[0];
+      // Get the balance in Wei
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const balance = await provider.getBalance(selectedAccount);
+      const balanceInEth = ethers.utils.formatEther(balance);
+    //   console.log(balanceInEth);
+      setMaxBalance(balanceInEth);
     //   window.location.reload();
     } catch (error) {
       console.log(error);
@@ -158,6 +178,7 @@ export const TransactionProvider = ({ children }) => {
   useEffect(() => {
     // checkIfWalletIsConnect();
     // checkIfTransactionsExists();
+    fetchGasPrice()
   }, [transactionCount]);
 
   return (
@@ -169,8 +190,9 @@ export const TransactionProvider = ({ children }) => {
         currentAccount,
         isLoading,
         mintAndDonate,
-        handleChange,
         formData,
+        gasPrice,
+        maxBalance
       }}
     >
       {children}

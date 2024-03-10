@@ -8,3 +8,5 @@ export const mockEthcontractAddress = '0xf46694f72C5e477193448a5cD1bCd5116e9d2B9
 export const charityVaultcontractAddress = '0x595c5Ea55528dbCCbB75D4D33f14b1e64A70Ba40'
 
 export const LIST_OF_CHAARITIES = ["EduDAO", "EduDAO2", "EduDAO3", "EduDAO4", "EduDAO5"] 
+
+export const ETHERSCAN_API_KEY="MWMR67HYE9R7RF6TBNK35I26ET34C8DVVB"
