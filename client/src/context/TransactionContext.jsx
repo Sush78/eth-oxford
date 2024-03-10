@@ -73,10 +73,11 @@ export const TransactionProvider = ({ children }) => {
     try {
         console.log(formData)
         if (ethereum) {
-          const retVal = createEthereumContract();    
-          await retVal.mockEthContract.mint(currentAccount, formData.ethAmount);
-          await retVal.mockEthContract.approve(charityVaultcontractAddress, 100000000);
-          await retVal.charityVaultContract._deposit(100000000);
+          const retVal = createEthereumContract();   
+          const amountInWei = ethers.utils.parseEther(formData.ethAmount.toString()); 
+          await retVal.mockEthContract.mint(currentAccount, amountInWei);
+          await retVal.mockEthContract.approve(charityVaultcontractAddress, amountInWei);
+          await retVal.charityVaultContract._deposit(amountInWei);
         console.log("done")
         }
     } catch (error) {
