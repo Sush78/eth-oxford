@@ -1,6 +1,6 @@
 # eth-oxford: FairDAO
 Repo for ETH oxford
-Presentation Slides: https://www.canva.com/design/DAF_HgzjCYI/goHU_-n1VYZmEhzQjPY8Ow/view?utm_content=DAF_HgzjCYI&utm_campaign=designshare&utm_medium=link&utm_source=editor
+Presentation Slides: [link](https://www.canva.com/design/DAF_HgzjCYI/goHU_-n1VYZmEhzQjPY8Ow/view?)utm_content=DAF_HgzjCYI&utm_campaign=designshare&utm_medium=link&utm_source=editor
 Video Demo links:
 Total Showcase:
 Front end only:
