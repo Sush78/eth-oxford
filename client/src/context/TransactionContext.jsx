@@ -129,7 +129,7 @@ export const TransactionProvider = ({ children }) => {
       const balance = await provider.getBalance(selectedAccount);
       const balanceInEth = ethers.utils.formatEther(balance);
     //   console.log(balanceInEth);
-      setMaxBalance(balanceInEth);
+      setMaxBalance(parseFloat(balanceInEth));
     //   window.location.reload();
     } catch (error) {
       console.log(error);
