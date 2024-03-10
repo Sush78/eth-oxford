@@ -35,9 +35,6 @@ Landing Page
 Staking Page
 ![Staking Page](./client/public/stakerPage.png)
 
-## Quick-Demo 
-[![Watch the Video]](./client/public/recording2.mp4)
-
 ## Debug Tips 
 - Run 'npm outdated' to check for outdated dependencies, and update them with 'npm update'.
 - Ensure ETHERSCAN API key is repalaced (not necessarily needed, absence might result in basic errors and empty transaction cost on staker page)
