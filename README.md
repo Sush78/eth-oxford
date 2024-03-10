@@ -1,5 +1,11 @@
 # eth-oxford: FairDAO
 Repo for ETH oxford
+Presentation Slides: https://www.canva.com/design/DAF_HgzjCYI/goHU_-n1VYZmEhzQjPY8Ow/view?utm_content=DAF_HgzjCYI&utm_campaign=designshare&utm_medium=link&utm_source=editor
+Video Demo links:
+Total Showcase:
+Front end only:
+Back end only: 
+
 
 #### Summary
 a novel approach to philanthropy, blockchain growth, and environmental sustainability. By harnessing the power of Ethereum staking and yield stripping, we propose an innovative system that automates donations to charitable causes and impactful initiatives, focusing on promoting blockchain adoption and supporting green initiatives Our platform not only incentivizes participation through governance tokens but also ensures that supporting global causes is seamless, efficient, and transparent.
