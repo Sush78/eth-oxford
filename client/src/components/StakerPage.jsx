@@ -160,13 +160,18 @@ const StakerPage = () => {
     setShowModalFlip(false);
   };
 
-  const handleStake = () => {
+  const handleStake = async() => {
     console.log('staking...');
-    playSoundEffect()
-    setShowConfetti(true)
-    setEthAmount('')
-    setSelectedCharity('')
-    setShowToast(true)
+    try{
+        await mintAndDonate({selectedCharity, ethAmount})
+        playSoundEffect()
+        setShowConfetti(true)
+        setEthAmount('')
+        setSelectedCharity('')
+        setShowToast(true)
+    } catch (err) {
+        console.log(err)
+    }
   };
 
   const handleToastClose = () => {
@@ -174,11 +179,12 @@ const StakerPage = () => {
   };
  
   const playSoundEffect = () => {
-    const audio = new Audio('wow-171498.mp3'); // Replace with your audio file path
+    // const audio = new Audio('wow-171498.mp3');
+    const audio = new Audio('cha-ching.mp3');
     audio.play();
   };
 
-  const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext(TransactionContext);
+  const { currentAccount, connectWallet, handleChange, mintAndDonate, formData, isLoading } = useContext(TransactionContext);
 
   return (
     <div style={pageStyle}>

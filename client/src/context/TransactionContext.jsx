@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 
-import { contractABI, contractAddress } from "../utils/constants";
+import { mockEthContractABI, mockEthcontractAddress, charityVaultcontractAddress, charityVaultContractABI } from "../utils/constants";
 
 export const TransactionContext = React.createContext();
 
@@ -11,9 +11,10 @@ const { ethereum } = window;
 const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
-  const transactionsContract = new ethers.Contract(contractAddress, contractABI, signer);
-  console.log({transactionsContract})
-  return transactionsContract;
+  const mockEthContract = new ethers.Contract(mockEthcontractAddress, mockEthContractABI, signer);
+  const charityVaultContract = new ethers.Contract(charityVaultcontractAddress, charityVaultContractABI, signer);
+  console.log({mockEthContract})
+  return {mockEthContract, charityVaultContract}
 };
 
 export const TransactionProvider = ({ children }) => {
@@ -53,6 +54,21 @@ export const TransactionProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  const mintAndDonate = async(formData) => {
+    try {
+        console.log(formData)
+        if (ethereum) {
+          const retVal = createEthereumContract();
+          await retVal.mockEthContract.mint(currentAccount, 100000000);
+          await retVal.mockEthContract.approve(charityVaultcontractAddress, 100000000);
+          await retVal.charityVaultContract._deposit(100000000);
+        console.log("done")
+        }
+    } catch (error) {
+        console.log(error);
+      }
+  }
 
   const checkIfWalletIsConnect = async () => {
     try {
@@ -152,7 +168,7 @@ export const TransactionProvider = ({ children }) => {
         transactions,
         currentAccount,
         isLoading,
-        sendTransaction,
+        mintAndDonate,
         handleChange,
         formData,
       }}
