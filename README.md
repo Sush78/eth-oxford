@@ -24,10 +24,10 @@ At the core of our project is a set of smart contracts designed for Ethereum sta
 
 #### Impact and Adoption
 Our platform is poised to make a substantial impact by:
-Providing consistent funding to charities and initiatives focused on blockchain adoption and environmental sustainability.
-Engaging a broader demographic in philanthropy through a transparent, blockchain-based system.
-Promoting the sustainable growth of blockchain technology by supporting green initiatives and carbon credit generation.
-We aim to partner with organizations that can tangibly bring about carbon reducing activities, and blockchain education like EduDAO and EthOxford to support educational ecosystems and foster the next generation of blockchain innovators.
+- Providing consistent funding to charities and initiatives focused on blockchain adoption and environmental sustainability.
+- Engaging a broader demographic in philanthropy through a transparent, blockchain-based system.
+- Promoting the sustainable growth of blockchain technology by supporting green initiatives and carbon credit generation.
+- We aim to partner with organizations that can tangibly bring about carbon reducing activities, and blockchain education like EduDAO and EthOxford to support educational ecosystems and foster the next generation of blockchain innovators.
 
 #### Conclusion
 Our project represents a novel convergence of blockchain technology and social impact. By automating donations from Ethereum staking rewards, we offer a sustainable model for supporting global causes, driving blockchain adoption, and promoting environmental sustainability. We invite partners, investors, and the broader community to join us in making a tangible difference through blockchain technology.
