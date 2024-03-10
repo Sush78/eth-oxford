@@ -4,7 +4,7 @@ import LandingPage from '../components/LandingPage';
 const LandingPageWrapper = () => {
   return (
   <>
-    <HeaderComp title="placeHoldername" />
+    <HeaderComp title="The Fair Platform" />
     <LandingPage />;
   </>
   )

@@ -19,3 +19,13 @@ npm i
 
 - You should see front end come up on  http://localhost:5173/ (unless otherwise specificed)
 - Intereact with the app, and have fun!
+
+## Smart contracts
+The public repo for smart contracts are here:
+https://github.com/0xKubko/eth-oxford
+
+## Images from the app Front-end
+
+![Landing Page](./client/public/landingPage.png)
+
+![Staking Page](./client/public/stakerPage.png)

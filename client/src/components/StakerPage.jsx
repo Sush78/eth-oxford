@@ -189,7 +189,7 @@ const StakerPage = () => {
     // Fetch the current Ether to Dollar exchange rate from a reliable source
     // You may use an API or any other method to get the latest exchange rate
     // For simplicity, we are returning a hardcoded value here
-    return 2000; // Replace with the actual exchange rate
+    return 3900; // not implemented a real price feed, future improvements
   };
 
   const getGasEstimate = () => {

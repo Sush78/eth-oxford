@@ -4,7 +4,7 @@ import HeaderComp from '../components/Header';
 const StakerPageWrapper = () => {
   return (
     <>
-      <HeaderComp title="placeHoldername" />
+      <HeaderComp title="The Fair Platform" />
       <StakerPage />;
     </>
 
